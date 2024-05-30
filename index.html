@@ -10,8 +10,8 @@
 	<body>
 		<div id="calculator">
 			<div id="output">
-				<div id="previous-output">123 +</div>
-				<div id="current-output">223</div>
+				<div data-previous-output id="previous-output"></div>
+				<div data-current-output id="current-output"></div>
 			</div>
 			<div id="buttons">
 				<div id="buttons-functions">
@@ -23,30 +23,30 @@
 					<button>M</button>
 				</div>
 				<div id="buttons-grid">
-					<button class="symbol-btn">%</button>
+					<button data-operation class="symbol-btn">%</button>
 					<button class="symbol-btn">CE</button>
-					<button class="symbol-btn">C</button>
-					<button class="symbol-btn">⌫</button>
-					<button class="symbol-btn">1/x</button>
-					<button class="symbol-btn">x²</button>
-					<button class="symbol-btn">√x</button>
-					<button class="symbol-btn">÷</button>
-					<button class="number-btn">7</button>
-					<button class="number-btn">8</button>
-					<button class="number-btn">9</button>
-					<button class="symbol-btn">✕</button>
-					<button class="number-btn">4</button>
-					<button class="number-btn">5</button>
-					<button class="number-btn">6</button>
-					<button class="symbol-btn">-</button>
-					<button class="number-btn">1</button>
-					<button class="number-btn">2</button>
-					<button class="number-btn">3</button>
-					<button class="symbol-btn">+</button>
-					<button class="number-btn">+/-</button>
-					<button class="number-btn">0</button>
-					<button class="number-btn">.</button>
-					<button id="equal-btn">=</button>
+					<button data-all-clear class="symbol-btn">C</button>
+					<button data-delete class="symbol-btn">⌫</button>
+					<button data-single-operation class="symbol-btn">1/x</button>
+					<button data-single-operation class="symbol-btn">x²</button>
+					<button data-single-operation class="symbol-btn">√x</button>
+					<button data-operation class="symbol-btn">÷</button>
+					<button data-number class="number-btn">7</button>
+					<button data-number class="number-btn">8</button>
+					<button data-number class="number-btn">9</button>
+					<button data-operation class="symbol-btn">x</button>
+					<button data-number class="number-btn">4</button>
+					<button data-number class="number-btn">5</button>
+					<button data-number class="number-btn">6</button>
+					<button data-operation class="symbol-btn">-</button>
+					<button data-number class="number-btn">1</button>
+					<button data-number class="number-btn">2</button>
+					<button data-number class="number-btn">3</button>
+					<button data-operation class="symbol-btn">+</button>
+					<button data-operation class="number-btn">+/-</button>
+					<button data-number class="number-btn">0</button>
+					<button data-number class="number-btn">.</button>
+					<button data-equals id="equal-btn">=</button>
 				</div>
 			</div>
 		</div>
