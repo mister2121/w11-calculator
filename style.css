@@ -30,20 +30,31 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-end;
-	word-break: break-all;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
+}
+
+#previous-output,
+#current-output {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 #previous-output {
 	color: rgba(255, 255, 255, 0.5);
 	font-size: 1.2rem;
 	display: flex;
+	height: 30px;
+	max-width: 28ch;
 }
 
 #current-output {
+	border: none;
+	background: none;
 	font-size: 2.7rem;
 	font-weight: bold;
+	color: white;
+	width: 100%;
+	text-align: right;
+	padding: 0;
 }
 
 #buttons {

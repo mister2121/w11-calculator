@@ -1,6 +1,6 @@
 class Calculator {
-	constructor(currentOutputTextElement, previousOutputTextElement) {
-		this.currentOutputTextElement = currentOutputTextElement
+	constructor(currentOutputInputElement, previousOutputTextElement) {
+		this.currentOutputInputElement = currentOutputInputElement
 		this.previousOutputTextElement = previousOutputTextElement
 		this.clear()
 		this.justComputed = false
@@ -16,6 +16,15 @@ class Calculator {
 	delete() {
 		if (this.currentOutput === "0") return
 		this.currentOutput = this.currentOutput.toString().slice(0, -1)
+	}
+
+	toggleSign() {
+		if (this.currentOutput !== "0") {
+			this.currentOutput = this.currentOutput.startsWith("-")
+				? this.currentOutput.slice(1)
+				: "-" + this.currentOutput
+			this.updateDisplay()
+		}
 	}
 
 	appendNumber(number) {
@@ -108,17 +117,42 @@ class Calculator {
 		this.justComputed = true
 	}
 
+	getDisplayNumber(number) {
+		const stringNumber = number.toString()
+		const integerDigits = parseFloat(stringNumber.split(".")[0])
+		const decimalDigits = stringNumber.split(".")[1]
+		let integerDisplay
+		if (isNaN(integerDigits)) {
+			integerDisplay = ""
+		} else {
+			integerDisplay = integerDigits.toLocaleString("en", {
+				maximumFractionDigits: 0,
+			})
+		}
+		if (decimalDigits != null) {
+			return `${integerDisplay}.${decimalDigits}`
+		} else {
+			return integerDisplay
+		}
+	}
+
 	updateDisplay() {
-		this.currentOutputTextElement.innerText = this.currentOutput
+		this.currentOutputInputElement.value = this.getDisplayNumber(
+			this.currentOutput
+		)
 		if (this.operation != null) {
-			this.previousOutputTextElement.innerText = `${this.previousOutput} ${this.operation}`
+			this.previousOutputTextElement.innerText = `${this.getDisplayNumber(
+				this.previousOutput
+			)} ${this.operation}`
 		} else {
 			this.previousOutputTextElement.innerText = ""
 		}
 	}
 }
 
-const currentOutputTextElement = document.querySelector("[data-current-output]")
+const currentOutputInputElement = document.querySelector(
+	"[data-current-output]"
+)
 const previousOutputTextElement = document.querySelector(
 	"[data-previous-output]"
 )
@@ -129,10 +163,11 @@ const singleOperationButtons = document.querySelectorAll(
 )
 const equalButton = document.querySelector("[data-equals]")
 const deleteButton = document.querySelector("[data-delete]")
-const clearButton = document.querySelector("[data-all-clear]")
+const clearButtons = document.querySelectorAll("[data-all-clear]")
+const negateButton = document.querySelector("[data-negate]")
 
 const calculator = new Calculator(
-	currentOutputTextElement,
+	currentOutputInputElement,
 	previousOutputTextElement
 )
 
@@ -145,9 +180,11 @@ numberButtons.forEach((button) => {
 	})
 })
 
-clearButton.addEventListener("click", () => {
-	calculator.clear()
-	calculator.updateDisplay()
+clearButtons.forEach((button) => {
+	button.addEventListener("click", () => {
+		calculator.clear()
+		calculator.updateDisplay()
+	})
 })
 
 operationButtons.forEach((button) => {
@@ -172,4 +209,8 @@ equalButton.addEventListener("click", (button) => {
 deleteButton.addEventListener("click", (button) => {
 	calculator.delete()
 	calculator.updateDisplay()
+})
+
+negateButton.addEventListener("click", () => {
+	calculator.toggleSign()
 })
